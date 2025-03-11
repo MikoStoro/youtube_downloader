@@ -1,0 +1,59 @@
+﻿<Window x:Class="YoutubeDonloader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YoutubeDonloader"
+        
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:DownloaderViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Orders}" AutoGenerateColumns="True">
+            
+        </DataGrid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition Height="Auto" /> 
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Margin="5" Grid.Row="0" Grid.Column="0">Output path:</Label>
+            <TextBlock Margin="5" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Name="OutputPathText" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding currentPath}" Cursor="AppStarting"></TextBlock>
+            <Button  Margin="5" Grid.Row="0"  Grid.Column="4" Command="{Binding setCurrentPathCommand}">Select output path</Button>
+
+            <Label Margin="5" Grid.Row="1" Grid.Column="0">Artist:</Label>
+            <TextBox Name="ArtistInput" Margin="5" Grid.Row="1" Grid.Column="1"  TextAlignment="Center" VerticalContentAlignment="Center" Text="{Binding currentArtist}"></TextBox>
+            <Label Margin="5" Grid.Row="1" Grid.Column="2">Album:</Label>
+            <TextBox Name="AlbumInput" Margin="5" Grid.Row="1" Grid.Column="3" TextAlignment="Center" VerticalContentAlignment="Center" Text="{Binding currentAlbum}"></TextBox>
+
+            <Label Margin="5"  Grid.Row="2" Grid.Column="0" >URL:</Label>
+            <TextBox Margin="5"  Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Name="UrlInput" Text="{Binding currentUrl}"></TextBox>
+
+            <Label Margin="5"  Grid.Row="3" Grid.Column="0" >Track From:</Label>
+            <TextBox Margin="5"  Grid.Row="3" Grid.Column="1" Name="FromInput" Text="{Binding currentPlaylistFrom}"></TextBox>
+            <Label Margin="5"  Grid.Row="3" Grid.Column="2" >Track To:</Label>
+            <TextBox Margin="5"  Grid.Row="3" Grid.Column="3" Name="ToInput"  Text="{Binding currentPlaylistTo}"></TextBox>
+
+            <Button IsEnabled="{Binding SetupComplete}"  Margin="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Command="{Binding downloadCommand}">DOWNLOAD</Button>
+
+        </Grid>
+    </Grid>
+</Window>
